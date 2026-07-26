@@ -4,3 +4,7 @@ WiFi Library
 HTTPClient Library
 ArduinoJson Library
 ESP32Servo Library
+Firebase Realtime Database
+HTML
+CSS
+JavaScript
