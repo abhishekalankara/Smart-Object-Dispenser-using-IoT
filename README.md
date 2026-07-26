@@ -1,24 +1,27 @@
 # Smart Object Dispenser using IoT
 
-An IoT-based Smart Object Dispenser developed using the **ESP32 microcontroller**, **Firebase Realtime Database**, and **Wi-Fi communication** for automated product dispensing. The system continuously monitors payment status from Firebase, automatically dispenses the selected product using dedicated servo motors, controls a conveyor mechanism through an L298N motor driver, and updates the dispensing status in real time.
+An IoT-based Smart Object Dispenser developed using the **ESP32 microcontroller**, **Firebase Realtime Database**, **Firebase Hosting**, **Wi-Fi communication**, and a **web-based interface** for automated product dispensing. The system monitors payment status in real time, automatically dispenses the selected product using servo motors, operates a conveyor mechanism through an L298N motor driver, and updates the dispensing status in Firebase.
 
 ---
 
 # Table of Contents
 
 - Overview
+- Live Demo
 - Project Highlights
 - Objectives
 - System Architecture
 - Hardware Components
 - Project Workflow
+- Web Application
+- Firebase Integration
 - Features
 - Results
 - Project Demonstration
 - Technologies Used
 - Repository Structure
 - Applications
-- Future Work
+- Future Enhancements
 - Author
 - Acknowledgements
 - License
@@ -29,9 +32,28 @@ An IoT-based Smart Object Dispenser developed using the **ESP32 microcontroller*
 
 The Smart Object Dispenser is an IoT-enabled automated dispensing system designed to simplify product distribution through cloud connectivity and embedded automation.
 
-The system uses an ESP32 microcontroller connected to Firebase Realtime Database over Wi-Fi. When a customer's payment is confirmed, the ESP32 automatically identifies the selected product, activates the corresponding servo motor, operates the conveyor mechanism, and updates the dispensing status back to Firebase.
+The system consists of an ESP32 microcontroller connected to Firebase Realtime Database over Wi-Fi. A web application hosted on Firebase Hosting allows users to browse products, add them to a cart, generate a UPI payment QR code, and update payment status. Once payment is confirmed, the ESP32 automatically dispenses the selected product using dedicated servo motors, operates the conveyor mechanism, and updates the dispensing status back to Firebase.
 
-This project demonstrates the integration of Embedded Systems, IoT, Cloud Computing, and Automation to create a reliable and scalable smart dispensing solution.
+This project demonstrates the integration of Embedded Systems, IoT, Cloud Computing, Firebase, and Web Technologies to create a smart and automated dispensing solution.
+
+---
+
+# Live Demo
+
+The Smart Object Dispenser web application is deployed using Firebase Hosting.
+
+**Live Website**
+
+https://smartvending-8f01d.web.app/
+
+The web application allows users to:
+
+- Browse available products
+- Add products to the shopping cart
+- Generate a UPI payment QR code
+- Complete payment
+- Synchronize payment information with Firebase Realtime Database
+- Automatically trigger product dispensing through the ESP32
 
 ---
 
@@ -39,25 +61,28 @@ This project demonstrates the integration of Embedded Systems, IoT, Cloud Comput
 
 - ESP32-based Smart Object Dispenser
 - Firebase Realtime Database Integration
+- Firebase Hosting
+- Web-Based User Interface
 - Wi-Fi Communication
 - Automated Product Dispensing
-- Three Servo Motor Control
+- Servo Motor Control
 - Conveyor Motor Control using L298N
-- Relay-Controlled Power Switching
+- Relay-Controlled Switching
 - Real-time Payment Monitoring
-- Automatic Firebase Status Update
-- Embedded Systems and IoT Integration
+- Cloud-Based Product Management
+- Automatic Dispensing Status Update
 
 ---
 
 # Objectives
 
-- Design an IoT-based automated dispensing system.
-- Connect ESP32 with Firebase Realtime Database.
+- Design an IoT-based smart object dispenser.
+- Develop a cloud-connected embedded system.
+- Enable online product selection through a website.
+- Generate UPI QR codes for payment.
 - Monitor payment status in real time.
-- Dispense products automatically after payment confirmation.
-- Update dispensing status in Firebase.
-- Develop a low-cost smart vending solution.
+- Automatically dispense products after successful payment.
+- Synchronize dispensing status with Firebase.
 
 ---
 
@@ -65,7 +90,8 @@ This project demonstrates the integration of Embedded Systems, IoT, Cloud Comput
 
 ## Input
 
-- User Payment
+- User
+- Web Application
 - Firebase Realtime Database
 
 ## Processing Unit
@@ -79,7 +105,7 @@ This project demonstrates the integration of Embedded Systems, IoT, Cloud Comput
 - Relay Module
 - Firebase Status Update
 
-The ESP32 continuously checks the payment status stored in Firebase. Once the payment status changes to **Completed**, the corresponding servo motor dispenses the selected product while the conveyor motor assists the dispensing process. Finally, the system updates Firebase with the **Dispensed** status.
+The web application stores payment information in Firebase. The ESP32 continuously checks the payment status through Wi-Fi. Once the payment is marked as **Completed**, the ESP32 identifies the selected product, activates the corresponding servo motor, operates the conveyor mechanism, and updates the status to **Dispensed** in Firebase.
 
 ---
 
@@ -88,41 +114,46 @@ The ESP32 continuously checks the payment status stored in Firebase. Once the pa
 | Component | Purpose |
 |-----------|----------|
 | ESP32 DevKit | Main Controller |
-| Servo Motors (3) | Product Dispensing |
+| Servo Motors | Product Dispensing |
 | L298N Motor Driver | Conveyor Motor Control |
 | Relay Module | Power Switching |
 | DC Motor | Conveyor Mechanism |
 | Firebase Realtime Database | Cloud Database |
+| Firebase Hosting | Web Hosting |
 | Wi-Fi | Wireless Communication |
-| 12V Battery / Adapter | Power Supply |
-| Buck Converter | 12V to 5V Conversion |
+| Power Supply | System Power |
 
 ---
 
 # Project Workflow
 
 ```text
-START
+User
    │
-Connect ESP32 to Wi-Fi
+   ▼
+Website
    │
-Connect to Firebase
+   ▼
+Firebase Realtime Database
    │
-Read Payment Status
+Wi-Fi
+   │
+   ▼
+ESP32
    │
 Payment Completed?
    │
-No ────────────────┐
-                   │
-Yes                │
- │                 │
+No ──────────────┐
+                 │
+Yes              │
+ │
 Read Product Name
  │
 Activate Relay
  │
 Run Conveyor Motor
  │
-Rotate Corresponding Servo
+Rotate Servo Motor
  │
 Dispense Product
  │
@@ -133,35 +164,75 @@ Repeat Monitoring
 
 ---
 
+# Web Application
+
+A responsive web interface was developed using HTML, CSS, and JavaScript and deployed on Firebase Hosting.
+
+### Features
+
+- Product browsing
+- Add-to-cart functionality
+- UPI QR code generation
+- Real-time payment status
+- Firebase integration
+- Automatic synchronization with ESP32
+- Responsive user interface
+
+The website serves as the primary interface between the customer and the vending system.
+
+---
+
+# Firebase Integration
+
+Firebase Realtime Database acts as the communication bridge between the website and the ESP32.
+
+Functions performed:
+
+- Product information storage
+- Payment status monitoring
+- Order information storage
+- Product selection
+- Dispensing status update
+- Real-time synchronization
+
+---
+
 # Features
 
-- Automatic Product Dispensing
-- ESP32-based Embedded Control
+- Automated Product Dispensing
+- ESP32 Embedded Controller
 - Firebase Cloud Integration
+- Firebase Hosted Website
 - Wi-Fi Communication
-- Three Independent Servo Motors
+- UPI QR Code Payment
+- Shopping Cart Interface
+- Product Selection
+- Servo Motor Control
 - Conveyor Motor Automation
-- Relay-Controlled Operation
-- Real-time Payment Verification
-- Cloud Status Synchronization
-- Low-cost IoT Solution
+- Relay Switching
+- Cloud Synchronization
+- Real-time Status Monitoring
 
 ---
 
 # Results
 
-The developed Smart Object Dispenser successfully demonstrated automated dispensing using cloud connectivity.
+The Smart Object Dispenser prototype was successfully developed and tested.
 
-The system successfully:
+The system successfully demonstrated:
 
-- Connected to Firebase Realtime Database.
-- Monitored payment status continuously.
-- Retrieved product information from Firebase.
-- Dispensed products automatically after payment confirmation.
-- Controlled three independent servo motors.
-- Operated the conveyor motor using the L298N motor driver.
-- Updated dispensing status to **Dispensed** in Firebase.
-- Demonstrated reliable communication between ESP32 and the cloud database.
+- Cloud-based product selection
+- Firebase Realtime Database communication
+- Wi-Fi connectivity with ESP32
+- Automatic payment verification
+- Product identification
+- Servo-based dispensing
+- Conveyor motor operation
+- Relay-controlled automation
+- Automatic database updates
+- Reliable embedded-cloud communication
+
+The prototype demonstrated an efficient and low-cost IoT-based dispensing solution suitable for smart vending applications.
 
 ---
 
@@ -173,19 +244,31 @@ The system successfully:
 
 ---
 
-## Hardware Connections
+## Hardware Connection
 
-![Hardware Connections](results/hardware_connection.png)
+![Hardware Connection](results/hardware_connection.png)
 
 ---
 
-## Firebase Database (Payment Pending)
+## Hardware Wiring
+
+![Hardware Wiring](results/hardware_wiring.png)
+
+---
+
+## Prototype
+
+![Prototype](results/prototype_front.jpg)
+
+---
+
+## Firebase Database (Pending)
 
 ![Firebase Pending](results/firebase_pending.png)
 
 ---
 
-## Firebase Database (Payment Completed)
+## Firebase Database (Completed)
 
 ![Firebase Completed](results/firebase_completed.png)
 
@@ -197,28 +280,41 @@ The system successfully:
 
 ---
 
+## Working Demonstration
+
+A complete demonstration of the Smart Object Dispenser is available in:
+
+`results/working_demo.mp4`
+
+---
+
 # Technologies Used
 
-## Programming Language
+## Programming Languages
 
 - Embedded C
-- Arduino
+- HTML
+- CSS
+- JavaScript
 
 ## Development Environment
 
 - Arduino IDE
+- Visual Studio Code
 
-## Hardware Platform
+## Embedded Platform
 
-- ESP32 Development Board
+- ESP32
 
-## Cloud Platform
+## Cloud Services
 
 - Firebase Realtime Database
+- Firebase Hosting
 
 ## Communication
 
 - Wi-Fi
+- HTTP
 
 ## Libraries
 
@@ -227,13 +323,13 @@ The system successfully:
 - ArduinoJson
 - ESP32Servo
 
-## Hardware Modules
+## Hardware
 
+- ESP32
 - Servo Motors
 - L298N Motor Driver
 - Relay Module
 - DC Motor
-- Buck Converter
 
 ---
 
@@ -245,13 +341,21 @@ Smart-Object-Dispenser-using-IoT/
 │
 ├── results/
 │   ├── circuit_diagram.png
-│   ├── hardware_connection.png
-│   ├── firebase_pending.png
 │   ├── firebase_completed.png
-│   └── serial_monitor.png
+│   ├── firebase_pending.png
+│   ├── hardware_connection.png
+│   ├── hardware_wiring.png
+│   ├── prototype_front.jpg
+│   ├── serial_monitor.png
+│   └── working_demo.mp4
 │
 ├── src/
 │   └── smart_object_dispenser.ino
+│
+├── website/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
 │
 ├── .gitignore
 ├── LICENSE
@@ -265,25 +369,25 @@ Smart-Object-Dispenser-using-IoT/
 
 - Smart Vending Machines
 - Retail Automation
-- Automated Product Dispensing
-- Inventory Management
-- Smart Cafeterias
+- Smart Stores
 - Educational Institutions
-- Industrial Automation
-- IoT-Based Smart Systems
+- Cafeteria Automation
+- Product Dispensing Systems
+- IoT Automation
+- Embedded System Applications
 
 ---
 
-# Future Work
+# Future Enhancements
 
-- QR Code-Based Product Selection
 - Mobile Application Integration
-- UPI Payment Gateway Integration
 - RFID/NFC Authentication
 - AI-Based Inventory Prediction
 - Cloud Analytics Dashboard
-- Multi-Product Inventory Management
-- Voice-Controlled Dispensing
+- Inventory Management System
+- Multiple Vending Machine Support
+- Voice-Controlled Interface
+- IoT Dashboard for Remote Monitoring
 
 ---
 
@@ -303,7 +407,7 @@ SRM University-AP
 
 # Acknowledgements
 
-I would like to express my sincere gratitude to the faculty members and mentors of the Department of Electronics and Communication Engineering, SRM University-AP, for their continuous guidance and support throughout this project. I also acknowledge the developers of Arduino IDE, ESP32, Firebase Realtime Database, and the open-source community for providing the tools and libraries that contributed to the successful implementation of this project.
+I would like to express my sincere gratitude to the faculty members and mentors of the Department of Electronics and Communication Engineering, SRM University-AP, for their continuous guidance and support throughout this project. I also acknowledge the open-source community and the developers of Arduino, ESP32, Firebase, and related software libraries for providing the tools that made this project possible.
 
 ---
 
