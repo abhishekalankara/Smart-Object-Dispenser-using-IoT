@@ -1,6 +1,0 @@
-Arduino IDE
-ESP32 Board Package
-WiFi Library
-HTTPClient Library
-ArduinoJson Library
-ESP32Servo Library
