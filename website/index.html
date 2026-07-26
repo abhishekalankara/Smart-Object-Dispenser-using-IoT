@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Vending Machine</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+
+<body>
+
+<h1>🚀 Smart Vending Machine</h1>
+
+<div id="products">Loading products...</div>
+
+<div id="cart">
+
+<h2>🛒 Cart</h2>
+
+<ul id="cart-items"></ul>
+
+<p><strong>Total: ₹<span id="cart-total">0</span></strong></p>
+
+<button onclick="payNow()">Pay Now</button>
+
+<button onclick="iHavePaid()">I have paid</button>
+
+<div id="qr-section">
+
+<h3>📷 Scan to Pay</h3>
+
+<img id="qr-img" src="" alt="QR Code">
+
+<div id="status-box" class="pending">
+Payment Status: Pending
+</div>
+
+<div id="time-box">
+⏰ Order Time (IST): --
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
